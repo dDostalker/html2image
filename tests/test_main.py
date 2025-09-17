@@ -343,3 +343,14 @@ def test_extend_save_as_param(browser):
 
     assert hti._extend_save_as_param(['a.png', 'b.png', None, 65], 2) == \
         ['a.png', 'b.png']
+
+@pytest.mark.parametrize("browser", TEST_BROWSERS)
+def test_force_device_scale_factor(browser):
+    hti = Html2Image(browser=browser, output_path=OUTPUT_PATH, disable_logging=True, force_device_scale_factor=2)
+
+    assert hti.force_device_scale_factor == "--force-device-scale-factor=2"
+    hti.screenshot(url='https://www.python.org', save_as="pyorg.png")
+    img = Image.open(hti.screenshot(url='https://www.python.org', save_as="pyorg.png")[0])
+    assert (3840, 2160) == img.size  # default size
+
+
