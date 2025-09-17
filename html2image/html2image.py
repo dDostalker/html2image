@@ -92,12 +92,12 @@ class Html2Image:
 
         self.output_path = output_path
         self.size = size
-        if force_device_scale_factor is not None:   
+        if force_device_scale_factor is not None:
             if not isinstance(force_device_scale_factor, int):
                 raise TypeError(f'"{force_device_scale_factor}" is not an integer.')
             self.force_device_scale_factor = (
                 f"--force-device-scale-factor={force_device_scale_factor}"
-                )
+            )
         else:
             self.force_device_scale_factor = None
         self.temp_path = temp_path
@@ -114,10 +114,13 @@ class Html2Image:
         else:
             normalized_flags = list(custom_flags)
 
-        if not any(
-            isinstance(flag, str) and flag.startswith("--force-device-scale-factor")
-            for flag in normalized_flags
-        ) and self.force_device_scale_factor is not None:
+        if (
+            not any(
+                isinstance(flag, str) and flag.startswith("--force-device-scale-factor")
+                for flag in normalized_flags
+            )
+            and self.force_device_scale_factor is not None
+        ):
             normalized_flags.append(self.force_device_scale_factor)
 
         if isinstance(browser_class, CDPBrowser):
