@@ -81,11 +81,11 @@ class Html2Image:
         browser_cdp_port=None,
         output_path=os.getcwd(),
         size=(1920, 1080),
-        force_device_scale_factor=None,
         temp_path=None,
         keep_temp_files=False,
         custom_flags=None,
         disable_logging=False,
+        force_device_scale_factor=None,
     ):
         if browser.lower() not in browser_map:
             raise ValueError(f'"{browser}" is not a browser known by HTML2Image.')
